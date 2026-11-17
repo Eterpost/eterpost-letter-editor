@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import pretty from 'pretty';
-import { fieldPlaceholder, ReceiverFieldStats } from './fields.js';
+import { canInsertField, fieldPlaceholder, ReceiverFieldStats } from './fields.js';
 import { FieldWarnings } from './FieldWarnings.js';
 import { RichText } from './RichText.js';
 import { readFlag, writeFlag } from './storage.js';
@@ -20,6 +20,8 @@ export interface EditorTab {
 
 export interface LetterEditorProps {
   className?: string;
+  // Тема редактора: auto — по настройке системы (по умолчанию), light, dark
+  colorScheme?: 'auto' | 'dark' | 'light';
   // Свои вкладки после «Редактор» и «HTML»
   extraTabs?: ReadonlyArray<EditorTab>;
   // Кнопки «Вставить поле»; нет — нет строки кнопок
@@ -68,7 +70,10 @@ export class LetterEditor extends React.Component<LetterEditorProps, LetterEdito
         name: 'Редактор'
       },
       {
-        content: <textarea value={html} onChange={this.handleRawHtmlChange} ref={this.textarea} />,
+        content: (
+          <textarea className='le-html' value={html} onChange={this.handleRawHtmlChange}
+                    ref={this.textarea} />
+        ),
         name: 'HTML'
       },
       ...(extraTabs || [])
@@ -85,7 +90,9 @@ export class LetterEditor extends React.Component<LetterEditorProps, LetterEdito
     ) : null;
     const titles = new Map((fields || []).map(field => [field.key, field.title]));
     return (
-      <div className={'le-editor' + (this.props.className ? ' ' + this.props.className : '')}>
+      <div className={'le-editor' + (this.props.className ? ' ' + this.props.className : '')}
+           data-color-scheme={this.props.colorScheme === 'auto' ? undefined :
+             this.props.colorScheme}>
         <Tabs selectedIndex={this.state.tabIndex} onSelect={this.handleTabSwitch}>
           <div className='le-tabs-bar'>
             <TabList>
@@ -114,7 +121,7 @@ export class LetterEditor extends React.Component<LetterEditorProps, LetterEdito
     return (
       <div className='le-fields' role='group' aria-label='Вставить поле получателя'>
         <span className='le-fields-label'>Вставить поле:</span>
-        {fields.map(field => (
+        {fields.filter(field => canInsertField(field.key)).map(field => (
           <button key={field.key} type='button' className='le-field'
                   title={`Вставить ${fieldPlaceholder(field.key)}`}
                   onMouseDown={event => event.preventDefault()}

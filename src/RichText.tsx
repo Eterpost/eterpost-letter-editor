@@ -36,6 +36,10 @@ export class RichText extends React.Component<RichTextProps> {
 
   componentWillUnmount () {
     document.removeEventListener('selectionchange', this.saveRange);
+    // StrictMode монтирует дважды: второй pell не должен встать рядом с первым
+    this.container.current?.replaceChildren();
+    this.editor = undefined;
+    this.range = undefined;
   }
 
   componentDidUpdate (prevProps: RichTextProps) {

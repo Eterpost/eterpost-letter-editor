@@ -36,8 +36,29 @@ describe('letter-editor.css', function () {
     assert.ok(list.length > 10, 'стили собраны');
     for (const selector of list) {
       for (const part of selector.split(',')) {
-        assert.match(part.trim(), /^\.le-editor(?![\w-])/, `правило вне .le-editor: ${part}`);
+        assert.match(part.trim(), /^(:where\()?\.le-editor(?![\w-])/,
+          `правило вне .le-editor: ${part}`);
       }
     }
   });
+
+  it('leaves host elements in extra tabs alone', function () {
+    const css = readFileSync(new URL('../dist/letter-editor.css', import.meta.url), 'utf8');
+    for (const selector of selectors(css)) {
+      assert.doesNotMatch(selector, /(^|[\s>,])(textarea|input|select|button)(?![\w-])/,
+        `голый элемент: ${selector}`);
+    }
+  });
+
+  it('lets the host set colours on the editor or above', function () {
+    const css = readFileSync(new URL('../dist/letter-editor.css', import.meta.url), 'utf8');
+    // Свои переменные пакет не присваивает: только читает с запасным значением
+    assert.doesNotMatch(css, /--le-[a-z]+\s*:/);
+    assert.match(css, /var\(--le-bg,/);
+    // Тёмная тема ОС не действует, если хозяин выбрал светлую
+    const darkByOs = /prefers-color-scheme:\s*dark[^{]*\{[^{]*:not\(\[data-color-scheme=light\]\)/;
+    assert.match(css, darkByOs);
+    assert.match(css, /\[data-color-scheme=dark\]/);
+  });
 });
+

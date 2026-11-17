@@ -57,4 +57,16 @@ describe('LetterEditor', function () {
     assert.ok(!titles(editorActions()).includes('Вставить изображение'));
     assert.ok(titles(editorActions(() => {})).includes('Вставить изображение'));
   });
+
+  it('does not offer fields Handlebars cannot address', function () {
+    const withBracket = [...fields, { key: 'extraData.a]b', title: 'Скобка' }];
+    const html = render({ fields: withBracket, html: '' });
+    assert.match(html, />Крупный клиент</);
+    assert.doesNotMatch(html, />Скобка</);
+  });
+
+  it('marks the colour scheme chosen by the host', function () {
+    assert.match(render({ colorScheme: 'light', html: '' }), /data-color-scheme="light"/);
+    assert.doesNotMatch(render({ html: '' }), /data-color-scheme/);
+  });
 });

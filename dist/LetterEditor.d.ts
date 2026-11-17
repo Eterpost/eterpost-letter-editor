@@ -10,6 +10,7 @@ export interface EditorTab {
 }
 export interface LetterEditorProps {
     className?: string;
+    colorScheme?: 'auto' | 'dark' | 'light';
     extraTabs?: ReadonlyArray<EditorTab>;
     fields?: ReadonlyArray<FieldOption>;
     fieldsHint?: string;

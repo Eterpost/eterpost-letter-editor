@@ -72,18 +72,7 @@
   display: block;
 }
 .le-editor {
-  --le-bg: #fff;
-  --le-surface: #fff;
-  --le-text: #1a1a1a;
-  --le-muted: #595959;
-  --le-border: #ccc;
-  --le-accent: #0a66c2;
-  --le-selected: #e7f0fa;
-  --le-hover: #f2f2f2;
-  --le-pressed: #e0e0e0;
-  --le-warning: #8a5300;
-  --le-focus: #0a66c2;
-  color: var(--le-text);
+  color: var(--le-_text);
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -106,49 +95,49 @@
   margin: 0;
 }
 .le-editor .react-tabs__tab {
-  color: var(--le-text);
+  color: var(--le-_text);
 }
 .le-editor .react-tabs__tab--selected {
-  background: var(--le-bg);
-  border-color: var(--le-border);
-  color: var(--le-text);
+  background: var(--le-_bg);
+  border-color: var(--le-_border);
+  color: var(--le-_text);
 }
 .le-editor .react-tabs__tab:focus::after {
-  background: var(--le-bg);
+  background: var(--le-_bg);
 }
 .le-editor .react-tabs__tab:focus-visible {
-  outline: 2px solid var(--le-focus);
+  outline: 2px solid var(--le-_focus);
   outline-offset: 1px;
 }
 .le-editor .pell {
-  border-color: var(--le-border);
+  border-color: var(--le-_border);
   display: flex;
   flex: 1;
   flex-direction: column;
 }
 .le-editor .pell-actionbar {
-  background-color: var(--le-surface);
-  border-bottom-color: var(--le-border);
+  background-color: var(--le-_surface);
+  border-bottom-color: var(--le-_border);
   margin-top: 1px;
 }
 .le-editor .pell-button {
-  color: var(--le-text);
+  color: var(--le-_text);
   min-width: 30px;
   width: auto;
 }
 .le-editor .pell-button-selected {
-  background-color: var(--le-pressed);
+  background-color: var(--le-_pressed);
 }
 .le-editor .pell-content {
-  background-color: var(--le-bg);
-  color: var(--le-text);
+  background-color: var(--le-_bg);
+  color: var(--le-_text);
   flex: 1;
   min-height: 300px;
 }
-.le-editor textarea {
-  background-color: var(--le-surface);
-  border: 1px solid var(--le-border);
-  color: var(--le-text);
+.le-editor .le-html {
+  background-color: var(--le-_surface);
+  border: 1px solid var(--le-_border);
+  color: var(--le-_text);
   flex: 1;
   font-family: monospace;
   min-height: 300px;
@@ -156,7 +145,7 @@
 
 .le-editor .le-tabs-bar {
   align-items: flex-end;
-  border-bottom: 1px solid var(--le-border);
+  border-bottom: 1px solid var(--le-_border);
   display: flex;
   gap: 8px;
   margin: 0 0 8px;
@@ -183,9 +172,9 @@
 
 .le-editor .le-theme-toggle {
   background: none;
-  border: 1px solid var(--le-border);
+  border: 1px solid var(--le-_border);
   border-radius: 4px;
-  color: var(--le-text);
+  color: var(--le-_text);
   cursor: pointer;
   display: none;
   font: inherit;
@@ -195,15 +184,15 @@
   padding: 0 10px;
 }
 .le-editor .le-theme-toggle:hover {
-  background-color: var(--le-hover);
+  background-color: var(--le-_hover);
 }
 .le-editor .le-theme-toggle:focus-visible {
-  outline: 2px solid var(--le-focus);
+  outline: 2px solid var(--le-_focus);
   outline-offset: 1px;
 }
 .le-editor .le-theme-toggle[aria-pressed=true] {
-  background-color: var(--le-selected);
-  border-color: var(--le-accent);
+  background-color: var(--le-_selected);
+  border-color: var(--le-_accent);
 }
 
 .le-editor .le-fields {
@@ -216,15 +205,15 @@
 
 .le-editor .le-fields-label,
 .le-editor .le-fields-hint {
-  color: var(--le-muted);
+  color: var(--le-_muted);
   font-size: 14px;
 }
 
 .le-editor .le-field {
-  background-color: var(--le-selected);
-  border: 1px solid var(--le-border);
+  background-color: var(--le-_selected);
+  border: 1px solid var(--le-_border);
   border-radius: 12px;
-  color: var(--le-text);
+  color: var(--le-_text);
   cursor: pointer;
   font: inherit;
   font-size: 14px;
@@ -235,35 +224,66 @@
   white-space: nowrap;
 }
 .le-editor .le-field:hover {
-  border-color: var(--le-accent);
+  border-color: var(--le-_accent);
 }
 .le-editor .le-field:focus-visible {
-  outline: 2px solid var(--le-focus);
+  outline: 2px solid var(--le-_focus);
   outline-offset: 1px;
 }
 
 .le-editor .le-warnings {
-  color: var(--le-warning);
+  color: var(--le-_warning);
   font-size: 14px;
   margin: 6px 0 0;
   padding-left: 20px;
 }
 
+:where(.le-editor) {
+  --le-_bg: var(--le-bg, #fff);
+  --le-_surface: var(--le-surface, #fff);
+  --le-_text: var(--le-text, #1a1a1a);
+  --le-_muted: var(--le-muted, #595959);
+  --le-_border: var(--le-border, #ccc);
+  --le-_accent: var(--le-accent, #0a66c2);
+  --le-_selected: var(--le-selected, #e7f0fa);
+  --le-_hover: var(--le-hover, #f2f2f2);
+  --le-_pressed: var(--le-pressed, #e0e0e0);
+  --le-_warning: var(--le-warning, #8a5300);
+  --le-_focus: var(--le-focus, #0a66c2);
+}
+
 @media (prefers-color-scheme: dark) {
-  .le-editor {
-    --le-bg: #1b1b1d;
-    --le-surface: #26272a;
-    --le-text: #e6e6e6;
-    --le-muted: #a6a6a6;
-    --le-border: #45474b;
-    --le-accent: #6cb2ff;
-    --le-selected: #1f3550;
-    --le-hover: #2f3034;
-    --le-pressed: #3a3b40;
-    --le-warning: #f0b45a;
-    --le-focus: #6cb2ff;
+  :where(.le-editor:not([data-color-scheme=light])) {
+    --le-_bg: var(--le-bg, #1b1b1d);
+    --le-_surface: var(--le-surface, #26272a);
+    --le-_text: var(--le-text, #e6e6e6);
+    --le-_muted: var(--le-muted, #a6a6a6);
+    --le-_border: var(--le-border, #45474b);
+    --le-_accent: var(--le-accent, #6cb2ff);
+    --le-_selected: var(--le-selected, #1f3550);
+    --le-_hover: var(--le-hover, #2f3034);
+    --le-_pressed: var(--le-pressed, #3a3b40);
+    --le-_warning: var(--le-warning, #f0b45a);
+    --le-_focus: var(--le-focus, #6cb2ff);
   }
-  .le-editor .le-theme-toggle {
+  .le-editor:not([data-color-scheme=light]) .le-theme-toggle {
     display: block;
   }
+}
+:where(.le-editor[data-color-scheme=dark]) {
+  --le-_bg: var(--le-bg, #1b1b1d);
+  --le-_surface: var(--le-surface, #26272a);
+  --le-_text: var(--le-text, #e6e6e6);
+  --le-_muted: var(--le-muted, #a6a6a6);
+  --le-_border: var(--le-border, #45474b);
+  --le-_accent: var(--le-accent, #6cb2ff);
+  --le-_selected: var(--le-selected, #1f3550);
+  --le-_hover: var(--le-hover, #2f3034);
+  --le-_pressed: var(--le-pressed, #3a3b40);
+  --le-_warning: var(--le-warning, #f0b45a);
+  --le-_focus: var(--le-focus, #6cb2ff);
+}
+
+.le-editor[data-color-scheme=dark] .le-theme-toggle {
+  display: block;
 }

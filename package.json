@@ -1,0 +1,47 @@
+{
+  "name": "eterpost-letter-editor",
+  "version": "0.1.0",
+  "description": "Letter editor of Eterpost: visual and HTML editing, receiver field buttons, empty field warnings",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./fields": {
+      "types": "./dist/fields.d.ts",
+      "default": "./dist/fields.js"
+    },
+    "./style.css": "./dist/letter-editor.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "npm run build && node --test 'test/*.test.mjs'",
+    "lint": "eslint .",
+    "typecheck": "tsc -p . --noEmit",
+    "verify": "npm run build && git diff --exit-code -- dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eterpost/eterpost-letter-editor.git"
+  },
+  "license": "AGPL-3.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "globals": "^17.14.0",
+    "handlebars": "^4.7.10",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0"
+  }
+}

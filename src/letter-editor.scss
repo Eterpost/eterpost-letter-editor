@@ -1,0 +1,231 @@
+// Стили редактора письма. Всё — внутри .le-editor: редактор встраивается в чужие
+// интерфейсы и не должен их задевать. Цвета — переменные --le-*, хозяин
+// переопределяет их на .le-editor или выше
+@use 'sass:meta';
+
+.le-editor {
+  // Стили pell и react-tabs — тоже только внутри редактора
+  @include meta.load-css('pell/dist/pell');
+  @include meta.load-css('react-tabs/style/react-tabs');
+
+  --le-bg: #fff;
+  --le-surface: #fff;
+  --le-text: #1a1a1a;
+  --le-muted: #595959;
+  --le-border: #ccc;
+  --le-accent: #0a66c2;
+  --le-selected: #e7f0fa;
+  --le-hover: #f2f2f2;
+  --le-pressed: #e0e0e0;
+  --le-warning: #8a5300;
+  --le-focus: #0a66c2;
+
+  color: var(--le-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  // Растягивается по высоте, если хозяин даёт место (flex-контейнер)
+  .react-tabs {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .react-tabs__tab-panel--selected {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .react-tabs__tab-list {
+    border-bottom: none;
+    flex: 1;
+    margin: 0;
+  }
+
+  .react-tabs__tab {
+    color: var(--le-text);
+  }
+
+  .react-tabs__tab--selected {
+    background: var(--le-bg);
+    border-color: var(--le-border);
+    color: var(--le-text);
+  }
+
+  .react-tabs__tab:focus::after {
+    background: var(--le-bg);
+  }
+
+  .react-tabs__tab:focus-visible {
+    outline: 2px solid var(--le-focus);
+    outline-offset: 1px;
+  }
+
+  .pell {
+    border-color: var(--le-border);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .pell-actionbar {
+    background-color: var(--le-surface);
+    border-bottom-color: var(--le-border);
+    margin-top: 1px;
+  }
+
+  .pell-button {
+    color: var(--le-text);
+    min-width: 30px;
+    width: auto;
+  }
+
+  .pell-button-selected {
+    background-color: var(--le-pressed);
+  }
+
+  .pell-content {
+    background-color: var(--le-bg);
+    color: var(--le-text);
+    flex: 1;
+    min-height: 300px;
+  }
+
+  textarea {
+    background-color: var(--le-surface);
+    border: 1px solid var(--le-border);
+    color: var(--le-text);
+    flex: 1;
+    font-family: monospace;
+    min-height: 300px;
+  }
+}
+
+// Вкладки и переключатель фона письма в одной строке
+.le-editor .le-tabs-bar {
+  align-items: flex-end;
+  border-bottom: 1px solid var(--le-border);
+  display: flex;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.le-editor .le-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.le-editor .le-pell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+// «Светлый фон»: письмо так, как его увидит получатель со светлой темой
+.le-editor .le-light .pell-content {
+  background-color: #fff;
+  color: #1a1a1a;
+  color-scheme: light;
+}
+
+.le-editor .le-theme-toggle {
+  background: none;
+  border: 1px solid var(--le-border);
+  border-radius: 4px;
+  color: var(--le-text);
+  cursor: pointer;
+  display: none;
+  font: inherit;
+  font-size: 14px;
+  margin-bottom: 4px;
+  min-height: 32px;
+  padding: 0 10px;
+
+  &:hover {
+    background-color: var(--le-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--le-focus);
+    outline-offset: 1px;
+  }
+
+  &[aria-pressed='true'] {
+    background-color: var(--le-selected);
+    border-color: var(--le-accent);
+  }
+}
+
+// «Вставить поле»: кнопки полей получателя над текстом письма
+.le-editor .le-fields {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin: 0 0 8px;
+}
+
+.le-editor .le-fields-label,
+.le-editor .le-fields-hint {
+  color: var(--le-muted);
+  font-size: 14px;
+}
+
+.le-editor .le-field {
+  background-color: var(--le-selected);
+  border: 1px solid var(--le-border);
+  border-radius: 12px;
+  color: var(--le-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  max-width: 220px;
+  overflow: hidden;
+  padding: 1px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: var(--le-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--le-focus);
+    outline-offset: 1px;
+  }
+}
+
+// Предупреждения о пустых подстановках под редактором
+.le-editor .le-warnings {
+  color: var(--le-warning);
+  font-size: 14px;
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .le-editor {
+    --le-bg: #1b1b1d;
+    --le-surface: #26272a;
+    --le-text: #e6e6e6;
+    --le-muted: #a6a6a6;
+    --le-border: #45474b;
+    --le-accent: #6cb2ff;
+    --le-selected: #1f3550;
+    --le-hover: #2f3034;
+    --le-pressed: #3a3b40;
+    --le-warning: #f0b45a;
+    --le-focus: #6cb2ff;
+  }
+
+  // В светлой теме письмо и так на белом — кнопка не нужна
+  .le-editor .le-theme-toggle {
+    display: block;
+  }
+}

@@ -1,0 +1,269 @@
+.le-editor .pell {
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  box-sizing: border-box;
+}
+.le-editor .pell-content {
+  box-sizing: border-box;
+  height: 300px;
+  outline: 0;
+  overflow-y: auto;
+  padding: 10px;
+}
+.le-editor .pell-actionbar {
+  background-color: #FFF;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+}
+.le-editor .pell-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  outline: 0;
+  width: 30px;
+  vertical-align: bottom;
+}
+.le-editor .pell-button-selected {
+  background-color: #F0F0F0;
+}
+.le-editor .react-tabs {
+  -webkit-tap-highlight-color: transparent;
+}
+.le-editor .react-tabs__tab-list {
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+}
+.le-editor .react-tabs__tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.le-editor .react-tabs__tab--selected {
+  background: #fff;
+  border-color: #aaa;
+  color: black;
+  border-radius: 5px 5px 0 0;
+}
+.le-editor .react-tabs__tab--disabled {
+  color: GrayText;
+  cursor: default;
+}
+.le-editor .react-tabs__tab:focus {
+  outline: none;
+}
+.le-editor .react-tabs__tab:focus:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: #fff;
+}
+.le-editor .react-tabs__tab-panel {
+  display: none;
+}
+.le-editor .react-tabs__tab-panel--selected {
+  display: block;
+}
+.le-editor {
+  --le-bg: #fff;
+  --le-surface: #fff;
+  --le-text: #1a1a1a;
+  --le-muted: #595959;
+  --le-border: #ccc;
+  --le-accent: #0a66c2;
+  --le-selected: #e7f0fa;
+  --le-hover: #f2f2f2;
+  --le-pressed: #e0e0e0;
+  --le-warning: #8a5300;
+  --le-focus: #0a66c2;
+  color: var(--le-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.le-editor .react-tabs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.le-editor .react-tabs__tab-panel--selected {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.le-editor .react-tabs__tab-list {
+  border-bottom: none;
+  flex: 1;
+  margin: 0;
+}
+.le-editor .react-tabs__tab {
+  color: var(--le-text);
+}
+.le-editor .react-tabs__tab--selected {
+  background: var(--le-bg);
+  border-color: var(--le-border);
+  color: var(--le-text);
+}
+.le-editor .react-tabs__tab:focus::after {
+  background: var(--le-bg);
+}
+.le-editor .react-tabs__tab:focus-visible {
+  outline: 2px solid var(--le-focus);
+  outline-offset: 1px;
+}
+.le-editor .pell {
+  border-color: var(--le-border);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.le-editor .pell-actionbar {
+  background-color: var(--le-surface);
+  border-bottom-color: var(--le-border);
+  margin-top: 1px;
+}
+.le-editor .pell-button {
+  color: var(--le-text);
+  min-width: 30px;
+  width: auto;
+}
+.le-editor .pell-button-selected {
+  background-color: var(--le-pressed);
+}
+.le-editor .pell-content {
+  background-color: var(--le-bg);
+  color: var(--le-text);
+  flex: 1;
+  min-height: 300px;
+}
+.le-editor textarea {
+  background-color: var(--le-surface);
+  border: 1px solid var(--le-border);
+  color: var(--le-text);
+  flex: 1;
+  font-family: monospace;
+  min-height: 300px;
+}
+
+.le-editor .le-tabs-bar {
+  align-items: flex-end;
+  border-bottom: 1px solid var(--le-border);
+  display: flex;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.le-editor .le-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.le-editor .le-pell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.le-editor .le-light .pell-content {
+  background-color: #fff;
+  color: #1a1a1a;
+  color-scheme: light;
+}
+
+.le-editor .le-theme-toggle {
+  background: none;
+  border: 1px solid var(--le-border);
+  border-radius: 4px;
+  color: var(--le-text);
+  cursor: pointer;
+  display: none;
+  font: inherit;
+  font-size: 14px;
+  margin-bottom: 4px;
+  min-height: 32px;
+  padding: 0 10px;
+}
+.le-editor .le-theme-toggle:hover {
+  background-color: var(--le-hover);
+}
+.le-editor .le-theme-toggle:focus-visible {
+  outline: 2px solid var(--le-focus);
+  outline-offset: 1px;
+}
+.le-editor .le-theme-toggle[aria-pressed=true] {
+  background-color: var(--le-selected);
+  border-color: var(--le-accent);
+}
+
+.le-editor .le-fields {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin: 0 0 8px;
+}
+
+.le-editor .le-fields-label,
+.le-editor .le-fields-hint {
+  color: var(--le-muted);
+  font-size: 14px;
+}
+
+.le-editor .le-field {
+  background-color: var(--le-selected);
+  border: 1px solid var(--le-border);
+  border-radius: 12px;
+  color: var(--le-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  max-width: 220px;
+  overflow: hidden;
+  padding: 1px 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.le-editor .le-field:hover {
+  border-color: var(--le-accent);
+}
+.le-editor .le-field:focus-visible {
+  outline: 2px solid var(--le-focus);
+  outline-offset: 1px;
+}
+
+.le-editor .le-warnings {
+  color: var(--le-warning);
+  font-size: 14px;
+  margin: 6px 0 0;
+  padding-left: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .le-editor {
+    --le-bg: #1b1b1d;
+    --le-surface: #26272a;
+    --le-text: #e6e6e6;
+    --le-muted: #a6a6a6;
+    --le-border: #45474b;
+    --le-accent: #6cb2ff;
+    --le-selected: #1f3550;
+    --le-hover: #2f3034;
+    --le-pressed: #3a3b40;
+    --le-warning: #f0b45a;
+    --le-focus: #6cb2ff;
+  }
+  .le-editor .le-theme-toggle {
+    display: block;
+  }
+}

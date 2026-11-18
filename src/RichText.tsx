@@ -51,7 +51,7 @@ export class RichText extends React.Component<RichTextProps> {
   }
 
   render () {
-    return <div className='le-pell' ref={this.container}></div>;
+    return <div className='le-pell pell' ref={this.container}></div>;
   }
 
   /**

@@ -31,4 +31,16 @@ describe('LetterEditor in StrictMode', function () {
     assert.equal(container.querySelector('.pell-content').innerHTML, '<p>Текст</p>');
     await act(async () => root.unmount());
   });
+
+  it('marks the pell element with the class its border rule needs', async function () {
+    const container = dom.window.document.getElementById('root');
+    const root = createRoot(container);
+    await act(async () => {
+      root.render(createElement(LetterEditor, { html: '', onChange () {} }));
+    });
+    // Рамку вокруг письма рисует правило .pell: без класса границ письма не видно
+    const editor = container.querySelector('.pell-content').parentElement;
+    assert.ok(editor.classList.contains('pell'), editor.className);
+    await act(async () => root.unmount());
+  });
 });

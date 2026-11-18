@@ -40,7 +40,7 @@ export class RichText extends React.Component {
         }
     }
     render() {
-        return _jsx("div", { className: 'le-pell', ref: this.container });
+        return _jsx("div", { className: 'le-pell pell', ref: this.container });
     }
     /**
      * Вставляет текст на место курсора, без курсора — в конец письма

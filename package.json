@@ -1,6 +1,6 @@
 {
   "name": "eterpost-letter-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Letter editor of Eterpost: visual and HTML editing, receiver field buttons, empty field warnings",
   "type": "module",
   "exports": {
